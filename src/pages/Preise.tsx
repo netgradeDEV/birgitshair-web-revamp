@@ -2,9 +2,14 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
+import { useSanityPrices } from "@/hooks/useSanityData";
 
 const Preise = () => {
-  const priceCategories = [
+  // Fetch price data from Sanity CMS
+  const { data: sanityPriceCategories } = useSanityPrices();
+
+  // Static fallback data
+  const staticPriceCategories = [
     {
       category: "Haarschnitte",
       items: [
@@ -59,6 +64,14 @@ const Preise = () => {
       ],
     },
   ];
+
+  // Use Sanity data if available, otherwise use static fallback
+  const priceCategories = sanityPriceCategories.length > 0
+    ? sanityPriceCategories.map((cat) => ({
+        category: cat.name,
+        items: cat.items,
+      }))
+    : staticPriceCategories;
 
   return (
     <div className="min-h-screen pt-20">

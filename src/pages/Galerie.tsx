@@ -5,16 +5,32 @@ import { Camera } from "lucide-react";
 import serviceColoring from "@/assets/service-coloring.jpg";
 import serviceCutting from "@/assets/service-cutting.jpg";
 import serviceStyling from "@/assets/service-styling.jpg";
+import { useSanityGallery } from "@/hooks/useSanityData";
+import { urlFor } from "@/lib/sanity";
 
 const Galerie = () => {
-  const galleryItems = [
-    { image: serviceColoring, title: "Coloration", category: "Farbe" },
-    { image: serviceCutting, title: "Haarschnitt", category: "Schnitt" },
-    { image: serviceStyling, title: "Styling", category: "Styling" },
-    { image: serviceColoring, title: "Highlights", category: "Farbe" },
-    { image: serviceCutting, title: "Kurzhaarschnitt", category: "Schnitt" },
-    { image: serviceStyling, title: "Hochsteckfrisur", category: "Styling" },
+  // Fetch gallery data from Sanity CMS
+  const { data: sanityGalleryItems } = useSanityGallery();
+
+  // Static fallback data
+  const staticGalleryItems = [
+    { image: serviceColoring, title: "Coloration", category: "Farbe", alt: "Coloration" },
+    { image: serviceCutting, title: "Haarschnitt", category: "Schnitt", alt: "Haarschnitt" },
+    { image: serviceStyling, title: "Styling", category: "Styling", alt: "Styling" },
+    { image: serviceColoring, title: "Highlights", category: "Farbe", alt: "Highlights" },
+    { image: serviceCutting, title: "Kurzhaarschnitt", category: "Schnitt", alt: "Kurzhaarschnitt" },
+    { image: serviceStyling, title: "Hochsteckfrisur", category: "Styling", alt: "Hochsteckfrisur" },
   ];
+
+  // Use Sanity data if available, otherwise use static fallback
+  const galleryItems = sanityGalleryItems.length > 0
+    ? sanityGalleryItems.map((item) => ({
+        image: urlFor(item.image).width(800).url(),
+        title: item.title,
+        category: item.category,
+        alt: item.image.alt || item.title,
+      }))
+    : staticGalleryItems;
 
   return (
     <div className="min-h-screen pt-20">
@@ -41,7 +57,7 @@ const Galerie = () => {
                 <div className="relative aspect-square overflow-hidden">
                   <img
                     src={item.image}
-                    alt={item.title}
+                    alt={item.alt || item.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

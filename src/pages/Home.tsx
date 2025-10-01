@@ -6,9 +6,16 @@ import { Scissors, Palette, Sparkles, Heart, Award, Clock } from "lucide-react";
 import serviceColoring from "@/assets/service-coloring.jpg";
 import serviceCutting from "@/assets/service-cutting.jpg";
 import serviceStyling from "@/assets/service-styling.jpg";
+import { useSanityServices, useSanityTestimonials } from "@/hooks/useSanityData";
+import { urlFor } from "@/lib/sanity";
 
 const Home = () => {
-  const services = [
+  // Fetch data from Sanity CMS
+  const { data: sanityServices } = useSanityServices();
+  const { data: sanityTestimonials } = useSanityTestimonials();
+
+  // Static fallback data
+  const staticServices = [
     {
       icon: Scissors,
       title: "Haarschnitte",
@@ -29,6 +36,35 @@ const Home = () => {
     },
   ];
 
+  const staticTestimonials = [
+    {
+      name: "Anna M.",
+      text: "Ich bin seit Jahren Stammkundin und immer begeistert. Birgit versteht genau, was zu mir passt!",
+    },
+    {
+      name: "Thomas K.",
+      text: "Professionelle Beratung, entspannte Atmosphäre und top Ergebnisse. Sehr empfehlenswert!",
+    },
+    {
+      name: "Lisa S.",
+      text: "Das beste Farbergebnis, das ich je hatte. Meine Haare sehen gesund und strahlend aus!",
+    },
+  ];
+
+  // Use Sanity data if available, otherwise use static fallback
+  const services = sanityServices.length > 0 
+    ? sanityServices.slice(0, 3).map((service) => ({
+        icon: service.icon as any, // Will be handled by ServiceCard
+        title: service.title,
+        description: service.description,
+        image: service.image ? urlFor(service.image).width(800).url() : undefined,
+      }))
+    : staticServices;
+
+  const testimonials = sanityTestimonials.length > 0
+    ? sanityTestimonials.slice(0, 3)
+    : staticTestimonials;
+
   const features = [
     {
       icon: Award,
@@ -44,21 +80,6 @@ const Home = () => {
       icon: Clock,
       title: "Flexible Termine",
       description: "Auch außerhalb der Öffnungszeiten",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Anna M.",
-      text: "Ich bin seit Jahren Stammkundin und immer begeistert. Birgit versteht genau, was zu mir passt!",
-    },
-    {
-      name: "Thomas K.",
-      text: "Professionelle Beratung, entspannte Atmosphäre und top Ergebnisse. Sehr empfehlenswert!",
-    },
-    {
-      name: "Lisa S.",
-      text: "Das beste Farbergebnis, das ich je hatte. Meine Haare sehen gesund und strahlend aus!",
     },
   ];
 

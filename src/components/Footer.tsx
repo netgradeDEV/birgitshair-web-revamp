@@ -1,20 +1,35 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
+import { useSanitySiteSettings } from "@/hooks/useSanityData";
 
 const Footer = () => {
+  const { data: siteSettings } = useSanitySiteSettings();
+
+  // Use Sanity settings or fallback to defaults
+  const siteName = siteSettings?.siteName || "Birgit Hartbauer";
+  const address = siteSettings?.address || "Mergentheimer Str. 24\n97084 Würzburg";
+  const phone = siteSettings?.phone || "0931 700 960 40";
+  const email = siteSettings?.email || "info@friseur-hartbauer.de";
+  const openingHours = siteSettings?.openingHours || "Mo - Fr: 8:00 - 18:00\nSa: 8:00 - 14:00";
+  const instagramUrl = siteSettings?.socialMedia?.instagram || "https://instagram.com";
+  const facebookUrl = siteSettings?.socialMedia?.facebook || "https://facebook.com";
+
+  const addressLines = address.split('\n');
+  const openingHoursLines = openingHours.split('\n');
+
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="font-serif text-xl font-semibold mb-4">Birgit Hartbauer</h3>
+            <h3 className="font-serif text-xl font-semibold mb-4">{siteName}</h3>
             <p className="text-sm text-muted-foreground mb-4">
               Ihr exklusiver Friseursalon in Würzburg Heidingsfeld seit über 20 Jahren.
             </p>
             <div className="flex space-x-4">
               <a
-                href="https://facebook.com"
+                href={facebookUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-accent transition-colors"
@@ -23,7 +38,7 @@ const Footer = () => {
                 <Facebook className="h-5 w-5" />
               </a>
               <a
-                href="https://instagram.com"
+                href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-accent transition-colors"
@@ -68,26 +83,30 @@ const Footer = () => {
               <li className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
                 <span className="text-muted-foreground">
-                  Mergentheimer Str. 24<br />
-                  97084 Würzburg
+                  {addressLines.map((line, index) => (
+                    <span key={index}>
+                      {line}
+                      {index < addressLines.length - 1 && <br />}
+                    </span>
+                  ))}
                 </span>
               </li>
               <li>
                 <a
-                  href="tel:+4993170096040"
+                  href={`tel:+49${phone.replace(/\s/g, '').replace(/^0/, '')}`}
                   className="flex items-center space-x-2 text-muted-foreground hover:text-accent transition-colors"
                 >
                   <Phone className="h-4 w-4 flex-shrink-0" />
-                  <span>0931 700 960 40</span>
+                  <span>{phone}</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:info@friseur-hartbauer.de"
+                  href={`mailto:${email}`}
                   className="flex items-center space-x-2 text-muted-foreground hover:text-accent transition-colors"
                 >
                   <Mail className="h-4 w-4 flex-shrink-0" />
-                  <span>info@friseur-hartbauer.de</span>
+                  <span>{email}</span>
                 </a>
               </li>
             </ul>
@@ -100,8 +119,9 @@ const Footer = () => {
               <li className="flex items-start space-x-2">
                 <Clock className="h-4 w-4 mt-0.5 text-accent flex-shrink-0" />
                 <div>
-                  <p>Mo - Fr: 8:00 - 18:00</p>
-                  <p>Sa: 8:00 - 14:00</p>
+                  {openingHoursLines.map((line, index) => (
+                    <p key={index}>{line}</p>
+                  ))}
                   <p className="text-xs mt-1">und nach Vereinbarung</p>
                 </div>
               </li>
@@ -111,7 +131,7 @@ const Footer = () => {
 
         {/* Bottom Bar */}
         <div className="border-t border-border mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Friseursalon Birgit Hartbauer. Alle Rechte vorbehalten.</p>
+          <p>&copy; {new Date().getFullYear()} Friseursalon {siteName}. Alle Rechte vorbehalten.</p>
           <div className="flex space-x-4 mt-4 md:mt-0">
             <Link to="/impressum" className="hover:text-accent transition-colors">
               Impressum

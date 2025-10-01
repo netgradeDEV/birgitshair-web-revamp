@@ -1,14 +1,17 @@
 import { Card } from "@/components/ui/card";
 import { LucideIcon } from "lucide-react";
+import DynamicIcon from "./DynamicIcon";
 
 interface ServiceCardProps {
-  icon: LucideIcon;
+  icon: LucideIcon | string;
   title: string;
   description: string;
   image?: string;
 }
 
 const ServiceCard = ({ icon: Icon, title, description, image }: ServiceCardProps) => {
+  const isStringIcon = typeof Icon === 'string';
+  
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 border-border">
       {image && (
@@ -24,7 +27,11 @@ const ServiceCard = ({ icon: Icon, title, description, image }: ServiceCardProps
       <div className="p-6">
         <div className="mb-4">
           <div className="inline-flex p-3 rounded-lg bg-primary/10 text-primary-dark group-hover:bg-accent group-hover:text-accent-foreground transition-colors">
-            <Icon className="h-6 w-6" />
+            {isStringIcon ? (
+              <DynamicIcon name={Icon as string} className="h-6 w-6" />
+            ) : (
+              <Icon className="h-6 w-6" />
+            )}
           </div>
         </div>
         <h3 className="font-serif text-xl font-semibold mb-2">{title}</h3>
