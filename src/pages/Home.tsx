@@ -54,10 +54,10 @@ const Home = () => {
   // Use Sanity data if available, otherwise use static fallback
   const services = sanityServices.length > 0 
     ? sanityServices.slice(0, 3).map((service) => ({
-        icon: service.icon as any, // Will be handled by ServiceCard
+        icon: service.icon as any,
         title: service.title,
         description: service.description,
-        image: service.image ? urlFor(service.image).width(800).url() : undefined,
+        image: service.image && urlFor(service.image) ? urlFor(service.image)?.width(800).url() : undefined,
       }))
     : staticServices;
 

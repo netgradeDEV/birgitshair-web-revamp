@@ -13,5 +13,8 @@ export const sanityClient = createClient({
 const builder = imageUrlBuilder(sanityClient);
 
 export function urlFor(source: any) {
+  if (!source || !source.asset) {
+    return null;
+  }
   return builder.image(source);
 }

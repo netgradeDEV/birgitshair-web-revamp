@@ -25,11 +25,11 @@ const Galerie = () => {
   // Use Sanity data if available, otherwise use static fallback
   const galleryItems = sanityGalleryItems.length > 0
     ? sanityGalleryItems.map((item) => ({
-        image: urlFor(item.image).width(800).url(),
+        image: urlFor(item.image) ? urlFor(item.image)?.width(800).url() || '' : '',
         title: item.title,
         category: item.category,
         alt: item.image.alt || item.title,
-      }))
+      })).filter(item => item.image) // Filter out items without images
     : staticGalleryItems;
 
   return (
