@@ -237,6 +237,14 @@ Aktuell **kein** Tracking implementiert. Bei Bedarf:
 
 ## 🔄 Deployment
 
+### Automatisches Deployment via GitHub Actions
+Bei jedem Push auf den `main` Branch wird automatisch:
+1. Das Projekt gebaut (`npm run build`)
+2. SPA-Routing vorbereitet (`404.html` erstellt)
+3. Auf GitHub Pages (`gh-pages` Branch) deployed
+
+**GitHub Pages Einstellungen:** Source auf "GitHub Actions" setzen
+
 ### Via Lovable
 1. In Lovable öffnen
 2. "Share" → "Publish" klicken
@@ -245,7 +253,6 @@ Aktuell **kein** Tracking implementiert. Bei Bedarf:
 ### Manuelle Deployment-Optionen
 - **Vercel**: `vercel --prod`
 - **Netlify**: `netlify deploy --prod`
-- **GitHub Pages**: Build-Output in `gh-pages` Branch
 
 ## 📝 Content-Management
 
