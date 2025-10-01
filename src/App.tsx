@@ -24,20 +24,32 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Navigation />
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/leistungen" element={<Leistungen />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/galerie" element={<Galerie />} />
-          <Route path="/preise" element={<Preise />} />
-          <Route path="/kontakt" element={<Kontakt />} />
-          <Route path="/impressum" element={<Impressum />} />
-          <Route path="/datenschutz" element={<Datenschutz />} />
+          {/* Admin route without Navigation/Footer */}
           <Route path="/admin" element={<Admin />} />
-          <Route path="*" element={<NotFound />} />
+          
+          {/* Regular routes with Navigation/Footer */}
+          <Route
+            path="/*"
+            element={
+              <>
+                <Navigation />
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/leistungen" element={<Leistungen />} />
+                  <Route path="/team" element={<Team />} />
+                  <Route path="/galerie" element={<Galerie />} />
+                  <Route path="/preise" element={<Preise />} />
+                  <Route path="/kontakt" element={<Kontakt />} />
+                  <Route path="/impressum" element={<Impressum />} />
+                  <Route path="/datenschutz" element={<Datenschutz />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Footer />
+              </>
+            }
+          />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
