@@ -13,7 +13,6 @@ import Preise from "./pages/Preise";
 import Kontakt from "./pages/Kontakt";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
-import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,32 +23,19 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <Navigation />
         <Routes>
-          {/* Admin route without Navigation/Footer */}
-          <Route path="/admin" element={<Admin />} />
-          
-          {/* Regular routes with Navigation/Footer */}
-          <Route
-            path="/*"
-            element={
-              <>
-                <Navigation />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/leistungen" element={<Leistungen />} />
-                  <Route path="/team" element={<Team />} />
-                  <Route path="/galerie" element={<Galerie />} />
-                  <Route path="/preise" element={<Preise />} />
-                  <Route path="/kontakt" element={<Kontakt />} />
-                  <Route path="/impressum" element={<Impressum />} />
-                  <Route path="/datenschutz" element={<Datenschutz />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-                <Footer />
-              </>
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/leistungen" element={<Leistungen />} />
+          <Route path="/team" element={<Team />} />
+          <Route path="/galerie" element={<Galerie />} />
+          <Route path="/preise" element={<Preise />} />
+          <Route path="/kontakt" element={<Kontakt />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/datenschutz" element={<Datenschutz />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

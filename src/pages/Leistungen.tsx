@@ -2,15 +2,11 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Scissors, Palette, Sparkles, Droplets, Wind, Gem } from "lucide-react";
-import { useSanityServiceCategories } from "@/hooks/useSanityData";
 import DynamicIcon from "@/components/DynamicIcon";
 
 const Leistungen = () => {
-  // Fetch service categories from Sanity
-  const { data: sanityServiceCategories } = useSanityServiceCategories();
-
-  // Static fallback data
-  const staticServices = [
+  // Service categories data
+  const services = [
     {
       icon: "scissors",
       category: "Haarschnitte",
@@ -71,11 +67,6 @@ const Leistungen = () => {
       ],
     },
   ];
-
-  // Use Sanity data if available, otherwise use static fallback
-  const services = sanityServiceCategories.length > 0
-    ? sanityServiceCategories
-    : staticServices;
 
   return (
     <div className="min-h-screen pt-20">

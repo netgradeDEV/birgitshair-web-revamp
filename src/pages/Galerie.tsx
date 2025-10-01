@@ -5,15 +5,10 @@ import { Camera } from "lucide-react";
 import serviceColoring from "@/assets/service-coloring.jpg";
 import serviceCutting from "@/assets/service-cutting.jpg";
 import serviceStyling from "@/assets/service-styling.jpg";
-import { useSanityGallery } from "@/hooks/useSanityData";
-import { urlFor } from "@/lib/sanity";
 
 const Galerie = () => {
-  // Fetch gallery data from Sanity CMS
-  const { data: sanityGalleryItems } = useSanityGallery();
-
-  // Static fallback data
-  const staticGalleryItems = [
+  // Gallery data
+  const galleryItems = [
     { image: serviceColoring, title: "Coloration", category: "Farbe", alt: "Coloration" },
     { image: serviceCutting, title: "Haarschnitt", category: "Schnitt", alt: "Haarschnitt" },
     { image: serviceStyling, title: "Styling", category: "Styling", alt: "Styling" },
@@ -21,16 +16,6 @@ const Galerie = () => {
     { image: serviceCutting, title: "Kurzhaarschnitt", category: "Schnitt", alt: "Kurzhaarschnitt" },
     { image: serviceStyling, title: "Hochsteckfrisur", category: "Styling", alt: "Hochsteckfrisur" },
   ];
-
-  // Use Sanity data if available, otherwise use static fallback
-  const galleryItems = sanityGalleryItems.length > 0
-    ? sanityGalleryItems.map((item) => ({
-        image: urlFor(item.image) ? urlFor(item.image)?.width(800).url() || '' : '',
-        title: item.title,
-        category: item.category,
-        alt: item.image.alt || item.title,
-      })).filter(item => item.image) // Filter out items without images
-    : staticGalleryItems;
 
   return (
     <div className="min-h-screen pt-20">

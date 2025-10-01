@@ -2,15 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-salon.jpg";
-import { useSanitySiteSettings } from "@/hooks/useSanityData";
 
 const Hero = () => {
-  const { data: siteSettings } = useSanitySiteSettings();
-  
-  // Use Sanity settings or fallback to defaults
-  const heroTitle = siteSettings?.heroTitle || "Ihre Schönheit, unsere Leidenschaft";
-  const heroSubtitle = siteSettings?.heroSubtitle || "Professionelle Haarschnitte, Coloration & Styling im Herzen von Würzburg Heidingsfeld. Seit über 20 Jahren Ihr Partner für perfekte Looks.";
-  const heroCTA = siteSettings?.heroCTA || "Jetzt Termin buchen";
+  // Hero content
+  const heroTitle = "Ihre Schönheit, unsere Leidenschaft";
+  const heroSubtitle = "Professionelle Haarschnitte, Coloration & Styling im Herzen von Würzburg Heidingsfeld. Seit über 20 Jahren Ihr Partner für perfekte Looks.";
+  const heroCTA = "Jetzt Termin buchen";
   
   return (
     <section className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">

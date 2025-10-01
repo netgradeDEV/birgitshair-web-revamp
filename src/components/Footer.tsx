@@ -1,18 +1,15 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
-import { useSanitySiteSettings } from "@/hooks/useSanityData";
 
 const Footer = () => {
-  const { data: siteSettings } = useSanitySiteSettings();
-
-  // Use Sanity settings or fallback to defaults
-  const siteName = siteSettings?.siteName || "Birgit Hartbauer";
-  const address = siteSettings?.address || "Mergentheimer Str. 24\n97084 Würzburg";
-  const phone = siteSettings?.phone || "0931 700 960 40";
-  const email = siteSettings?.email || "info@friseur-hartbauer.de";
-  const openingHours = siteSettings?.openingHours || "Mo - Fr: 8:00 - 18:00\nSa: 8:00 - 14:00";
-  const instagramUrl = siteSettings?.socialMedia?.instagram || "https://instagram.com";
-  const facebookUrl = siteSettings?.socialMedia?.facebook || "https://facebook.com";
+  // Site settings
+  const siteName = "Birgit Hartbauer";
+  const address = "Mergentheimer Str. 24\n97084 Würzburg";
+  const phone = "0931 700 960 40";
+  const email = "info@friseur-hartbauer.de";
+  const openingHours = "Mo - Fr: 8:00 - 18:00\nSa: 8:00 - 14:00";
+  const instagramUrl = "https://instagram.com";
+  const facebookUrl = "https://facebook.com";
 
   const addressLines = address.split('\n');
   const openingHoursLines = openingHours.split('\n');
