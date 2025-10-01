@@ -40,6 +40,21 @@ export interface GalleryItem {
   order?: number;
 }
 
+export interface ServiceCategory {
+  _id: string;
+  _type: 'serviceCategory';
+  category: string;
+  icon: string;
+  items: ServiceCategoryItem[];
+  order?: number;
+}
+
+export interface ServiceCategoryItem {
+  _key: string;
+  name: string;
+  description: string;
+}
+
 export interface PriceCategory {
   _id: string;
   _type: 'priceCategory';

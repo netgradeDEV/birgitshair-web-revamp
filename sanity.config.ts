@@ -246,6 +246,63 @@ const priceCategorySchema = {
   ],
 };
 
+const serviceCategorySchema = {
+  name: 'serviceCategory',
+  title: 'Leistungskategorien (Detailseite)',
+  type: 'document',
+  fields: [
+    {
+      name: 'category',
+      title: 'Kategorie Name',
+      type: 'string',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'icon',
+      title: 'Icon Name (Lucide React)',
+      type: 'string',
+      description: 'z.B.: scissors, palette, sparkles, droplets, wind, gem',
+      validation: (Rule: any) => Rule.required(),
+    },
+    {
+      name: 'items',
+      title: 'Leistungen',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            {
+              name: 'name',
+              title: 'Leistungsname',
+              type: 'string',
+              validation: (Rule: any) => Rule.required(),
+            },
+            {
+              name: 'description',
+              title: 'Beschreibung',
+              type: 'text',
+              validation: (Rule: any) => Rule.required(),
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'order',
+      title: 'Reihenfolge',
+      type: 'number',
+    },
+  ],
+  orderings: [
+    {
+      title: 'Reihenfolge',
+      name: 'orderAsc',
+      by: [{ field: 'order', direction: 'asc' }],
+    },
+  ],
+};
+
 const testimonialSchema = {
   name: 'testimonial',
   title: 'Testimonials',
@@ -363,6 +420,7 @@ export default defineConfig({
       serviceSchema,
       teamMemberSchema,
       galleryItemSchema,
+      serviceCategorySchema,
       priceCategorySchema,
       testimonialSchema,
       siteSettingsSchema,

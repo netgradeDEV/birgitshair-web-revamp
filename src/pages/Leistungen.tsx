@@ -2,11 +2,17 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Scissors, Palette, Sparkles, Droplets, Wind, Gem } from "lucide-react";
+import { useSanityServiceCategories } from "@/hooks/useSanityData";
+import DynamicIcon from "@/components/DynamicIcon";
 
 const Leistungen = () => {
-  const services = [
+  // Fetch service categories from Sanity
+  const { data: sanityServiceCategories } = useSanityServiceCategories();
+
+  // Static fallback data
+  const staticServices = [
     {
-      icon: Scissors,
+      icon: "scissors",
       category: "Haarschnitte",
       items: [
         { name: "Damenhaarschnitt", description: "Präziser Schnitt mit individueller Beratung" },
@@ -16,7 +22,7 @@ const Leistungen = () => {
       ],
     },
     {
-      icon: Palette,
+      icon: "palette",
       category: "Coloration",
       items: [
         { name: "Komplettcoloration", description: "Vollständige Farbveränderung oder Auffrischung" },
@@ -26,7 +32,7 @@ const Leistungen = () => {
       ],
     },
     {
-      icon: Sparkles,
+      icon: "sparkles",
       category: "Styling",
       items: [
         { name: "Föhnen & Styling", description: "Perfektes Finish für jeden Anlass" },
@@ -36,7 +42,7 @@ const Leistungen = () => {
       ],
     },
     {
-      icon: Droplets,
+      icon: "droplets",
       category: "Pflege-Treatments",
       items: [
         { name: "Intensivpflege", description: "Tiefenwirksame Haarpflege" },
@@ -46,7 +52,7 @@ const Leistungen = () => {
       ],
     },
     {
-      icon: Wind,
+      icon: "wind",
       category: "Dauerwelle & Glätten",
       items: [
         { name: "Dauerwelle", description: "Natürliche Locken und Volumen" },
@@ -55,7 +61,7 @@ const Leistungen = () => {
       ],
     },
     {
-      icon: Gem,
+      icon: "gem",
       category: "Extras",
       items: [
         { name: "Augenbrauen färben", description: "Perfekt abgestimmte Augenbrauen" },
@@ -65,6 +71,11 @@ const Leistungen = () => {
       ],
     },
   ];
+
+  // Use Sanity data if available, otherwise use static fallback
+  const services = sanityServiceCategories.length > 0
+    ? sanityServiceCategories
+    : staticServices;
 
   return (
     <div className="min-h-screen pt-20">
@@ -88,7 +99,7 @@ const Leistungen = () => {
               <Card key={index} className="p-8 hover:shadow-lg transition-shadow border-border">
                 <div className="flex items-start space-x-4 mb-6">
                   <div className="p-3 rounded-lg bg-accent/10 text-accent flex-shrink-0">
-                    <service.icon className="h-7 w-7" />
+                    <DynamicIcon name={service.icon} className="h-7 w-7" />
                   </div>
                   <h2 className="font-serif text-3xl font-semibold">{service.category}</h2>
                 </div>

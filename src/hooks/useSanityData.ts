@@ -4,6 +4,7 @@ import {
   Service,
   TeamMember,
   GalleryItem,
+  ServiceCategory,
   PriceCategory,
   Testimonial,
   SiteSettings,
@@ -53,6 +54,14 @@ export function useSanityTeam() {
 export function useSanityGallery() {
   return useSanityQuery<GalleryItem[]>(
     '*[_type == "galleryItem"] | order(order asc)',
+    []
+  );
+}
+
+// Service Categories Hook (for detailed Leistungen page)
+export function useSanityServiceCategories() {
+  return useSanityQuery<ServiceCategory[]>(
+    '*[_type == "serviceCategory"] | order(order asc)',
     []
   );
 }
