@@ -2,6 +2,22 @@
 
 Moderne, responsive Website für den Friseursalon Birgit Hartbauer in Würzburg Heidingsfeld.
 
+## 🎨 CMS Integration: Sanity.io
+
+Diese Website ist vorbereitet für **Sanity.io** als Content Management System. Der Kunde kann damit alle Inhalte selbstständig bearbeiten – ähnlich wie WordPress, aber moderner und benutzerfreundlicher.
+
+**📖 Detaillierte Setup-Anleitung:** Siehe [SANITY_SETUP.md](./SANITY_SETUP.md)
+
+### Quick Start (für Entwickler):
+
+1. Sanity-Projekt auf [sanity.io](https://sanity.io) erstellen
+2. Schemas aus `sanity-schemas/` in Sanity Studio kopieren
+3. `.env` Datei erstellen (siehe `.env.example`)
+4. Inhalte im Studio eingeben
+5. React-Komponenten auf Sanity-Daten umstellen (optional, aktuell statisch)
+
+**Aktueller Stand:** Die Website nutzt noch statische Daten, alle Sanity-Infrastruktur ist vorbereitet für die Migration.
+
 ## 🎯 Projektziel
 
 Erstellung einer modernen, schnellen und vollständig responsiven Website für einen etablierten Friseursalon mit über 20 Jahren Erfahrung. Die Website soll:
