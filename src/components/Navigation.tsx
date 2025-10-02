@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Settings } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
-  const { isAdmin } = useAuth();
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -54,14 +52,6 @@ const Navigation = () => {
               <Phone className="h-4 w-4" />
               <span className="font-medium">0931 700 960 40</span>
             </a>
-            {isAdmin && (
-              <Button asChild variant="outline">
-                <Link to="/admin">
-                  <Settings className="h-4 w-4 mr-2" />
-                  Admin
-                </Link>
-              </Button>
-            )}
             <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
               <Link to="/kontakt">Termin buchen</Link>
             </Button>
@@ -102,14 +92,6 @@ const Navigation = () => {
                 <Phone className="h-4 w-4" />
                 <span>0931 700 960 40</span>
               </a>
-              {isAdmin && (
-                <Button asChild variant="outline" className="mx-4">
-                  <Link to="/admin" onClick={() => setIsOpen(false)}>
-                    <Settings className="h-4 w-4 mr-2" />
-                    Admin
-                  </Link>
-                </Button>
-              )}
               <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground mx-4">
                 <Link to="/kontakt" onClick={() => setIsOpen(false)}>
                   Termin buchen
