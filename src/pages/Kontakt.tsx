@@ -6,6 +6,35 @@ import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
+import { z } from "zod";
+
+// Validation schema with security measures
+const contactSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, { message: "Name ist erforderlich" })
+    .max(100, { message: "Name darf maximal 100 Zeichen lang sein" })
+    .regex(/^[a-zA-ZäöüÄÖÜß\s\-']+$/, { message: "Name enthält ungültige Zeichen" }),
+  email: z
+    .string()
+    .trim()
+    .min(1, { message: "E-Mail ist erforderlich" })
+    .email({ message: "Ungültige E-Mail-Adresse" })
+    .max(255, { message: "E-Mail darf maximal 255 Zeichen lang sein" }),
+  phone: z
+    .string()
+    .trim()
+    .max(30, { message: "Telefonnummer darf maximal 30 Zeichen lang sein" })
+    .regex(/^[0-9\s\+\-\(\)\/]*$/, { message: "Telefonnummer enthält ungültige Zeichen" })
+    .optional()
+    .or(z.literal("")),
+  message: z
+    .string()
+    .trim()
+    .min(1, { message: "Nachricht ist erforderlich" })
+    .max(1000, { message: "Nachricht darf maximal 1000 Zeichen lang sein" }),
+});
 
 const Kontakt = () => {
   const { toast } = useToast();
@@ -16,27 +45,71 @@ const Kontakt = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
     setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Validate input with Zod
+      const validatedData = contactSchema.parse(formData);
+
+      // Create WhatsApp message with proper encoding
+      const whatsappNumber = "4993170096040";
+      const message = `Neue Kontaktanfrage:\n\nName: ${validatedData.name}\nE-Mail: ${validatedData.email}\nTelefon: ${validatedData.phone || "Nicht angegeben"}\n\nNachricht:\n${validatedData.message}`;
+      
+      // Properly encode for URL to prevent XSS
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+
+      // Open WhatsApp in new window
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
       toast({
-        title: "Nachricht gesendet!",
-        description: "Vielen Dank für Ihre Anfrage. Wir melden uns schnellstmöglich bei Ihnen.",
+        title: "Nachricht vorbereitet!",
+        description: "WhatsApp wird geöffnet. Bitte senden Sie die Nachricht dort ab.",
       });
+
+      // Reset form after successful validation
       setFormData({ name: "", email: "", phone: "", message: "" });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        // Map validation errors to form fields
+        const fieldErrors: Record<string, string> = {};
+        error.errors.forEach((err) => {
+          if (err.path[0]) {
+            fieldErrors[err.path[0].toString()] = err.message;
+          }
+        });
+        setErrors(fieldErrors);
+
+        toast({
+          title: "Validierungsfehler",
+          description: "Bitte überprüfen Sie Ihre Eingaben.",
+          variant: "destructive",
+        });
+      }
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   };
 
   return (
@@ -161,7 +234,11 @@ const Kontakt = () => {
                       onChange={handleChange}
                       required
                       placeholder="Ihr Name"
+                      className={errors.name ? "border-destructive" : ""}
                     />
+                    {errors.name && (
+                      <p className="text-sm text-destructive">{errors.name}</p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -174,7 +251,11 @@ const Kontakt = () => {
                       onChange={handleChange}
                       required
                       placeholder="ihre@email.de"
+                      className={errors.email ? "border-destructive" : ""}
                     />
+                    {errors.email && (
+                      <p className="text-sm text-destructive">{errors.email}</p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -186,7 +267,11 @@ const Kontakt = () => {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="Ihre Telefonnummer (optional)"
+                      className={errors.phone ? "border-destructive" : ""}
                     />
+                    {errors.phone && (
+                      <p className="text-sm text-destructive">{errors.phone}</p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -199,7 +284,11 @@ const Kontakt = () => {
                       required
                       placeholder="Ihr Anliegen oder Terminwunsch..."
                       rows={6}
+                      className={errors.message ? "border-destructive" : ""}
                     />
+                    {errors.message && (
+                      <p className="text-sm text-destructive">{errors.message}</p>
+                    )}
                   </div>
 
                   <p className="text-xs text-muted-foreground">
@@ -216,8 +305,12 @@ const Kontakt = () => {
                     disabled={isSubmitting}
                     className="w-full bg-accent hover:bg-accent/90 text-accent-foreground"
                   >
-                    {isSubmitting ? "Wird gesendet..." : "Nachricht senden"}
+                    {isSubmitting ? "Wird gesendet..." : "Via WhatsApp senden"}
                   </Button>
+                  
+                  <p className="text-xs text-muted-foreground text-center">
+                    Beim Absenden wird WhatsApp mit Ihrer Nachricht geöffnet
+                  </p>
                 </form>
               </Card>
             </div>
