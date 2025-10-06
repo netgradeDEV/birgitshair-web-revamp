@@ -9,16 +9,16 @@ const Impressum = () => {
             <h2 className="font-serif text-2xl font-semibold mb-4">Angaben gemäß § 5 TMG</h2>
             <p>
               Friseursalon Birgit Hartbauer<br />
-              Birgit Hartbauer<br />
-              Mergentheimer Straße 24<br />
-              97084 Würzburg
+              Beauty, Kosmetik und Körperpflege<br />
+              Wolfskeelstraße 23<br />
+              Würzburg - Rottenbauer
             </p>
           </section>
 
           <section>
             <h2 className="font-serif text-2xl font-semibold mb-4">Kontakt</h2>
             <p>
-              Telefon: 0931 700 960 40<br />
+              Telefon: 0931/6606888<br />
               E-Mail: info@friseur-hartbauer.de
             </p>
           </section>

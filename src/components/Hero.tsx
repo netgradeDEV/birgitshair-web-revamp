@@ -6,7 +6,7 @@ import heroImage from "@/assets/hero-salon.jpg";
 const Hero = () => {
   // Hero content
   const heroTitle = "Ihre Schönheit, unsere Leidenschaft";
-  const heroSubtitle = "Professionelle Haarschnitte, Coloration & Styling im Herzen von Würzburg Heidingsfeld. Seit über 20 Jahren Ihr Partner für perfekte Looks.";
+  const heroSubtitle = "Professionelle Haarschnitte, Coloration & Styling in Würzburg - Rottenbauer. Seit über 20 Jahren Ihr Partner für perfekte Looks.";
   const heroCTA = "Jetzt Termin buchen";
   
   return (

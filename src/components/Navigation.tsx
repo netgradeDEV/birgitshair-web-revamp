@@ -48,9 +48,9 @@ const Navigation = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href="tel:+4993170096040" className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
+            <a href="tel:+499316606888" className="flex items-center space-x-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
               <Phone className="h-4 w-4" />
-              <span className="font-medium">0931 700 960 40</span>
+              <span className="font-medium">0931/6606888</span>
             </a>
             <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground">
               <Link to="/kontakt">Termin buchen</Link>
@@ -86,11 +86,11 @@ const Navigation = () => {
                 </Link>
               ))}
               <a
-                href="tel:+4993170096040"
+                href="tel:+499316606888"
                 className="px-4 py-3 text-sm font-medium text-foreground hover:bg-secondary rounded-md flex items-center space-x-2"
               >
                 <Phone className="h-4 w-4" />
-                <span>0931 700 960 40</span>
+                <span>0931/6606888</span>
               </a>
               <Button asChild className="bg-accent hover:bg-accent/90 text-accent-foreground mx-4">
                 <Link to="/kontakt" onClick={() => setIsOpen(false)}>

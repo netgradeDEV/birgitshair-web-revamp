@@ -18,7 +18,8 @@ import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
 const App = () => {
-  const basename = import.meta.env.PROD ? "/birgitshair-web-revamp" : "";
+  const isGithubPages = typeof window !== "undefined" && window.location.hostname.endsWith("github.io");
+  const basename = isGithubPages ? "/birgitshair-web-revamp" : "";
   
   return (
     <QueryClientProvider client={queryClient}>

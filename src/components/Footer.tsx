@@ -4,12 +4,12 @@ import { MapPin, Phone, Mail, Clock, Facebook, Instagram } from "lucide-react";
 const Footer = () => {
   // Site settings
   const siteName = "Birgit Hartbauer";
-  const address = "Mergentheimer Str. 24\n97084 Würzburg";
-  const phone = "0931 700 960 40";
+  const address = "Wolfskeelstraße 23\nWürzburg - Rottenbauer";
+  const phone = "0931/6606888";
   const email = "info@friseur-hartbauer.de";
-  const openingHours = "Mo - Fr: 8:00 - 18:00\nSa: 8:00 - 14:00";
-  const instagramUrl = "https://instagram.com";
-  const facebookUrl = "https://facebook.com";
+  const openingHours = "Dienstag & Mittwoch: 9:00 - 18:00\nDonnerstag: 9:00 - 16:00\nFreitag: 9:00 - 19:00\nSamstag: 8:00 - 13:00";
+  const instagramUrl = "https://www.instagram.com/salon_birgit_hartbauer/";
+  const facebookUrl = "https://www.facebook.com/profile.php?id=100043242323376";
 
   const addressLines = address.split('\n');
   const openingHoursLines = openingHours.split('\n');
@@ -22,7 +22,7 @@ const Footer = () => {
           <div>
             <h3 className="font-serif text-xl font-semibold mb-4">{siteName}</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Ihr exklusiver Friseursalon in Würzburg Heidingsfeld seit über 20 Jahren.
+              Beauty, Kosmetik und Körperpflege – Würzburg - Rottenbauer.
             </p>
             <div className="flex space-x-4">
               <a
@@ -90,7 +90,7 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href={`tel:+49${phone.replace(/\s/g, '').replace(/^0/, '')}`}
+                  href={`tel:+49${phone.replace(/\D/g, '').replace(/^0/, '')}`}
                   className="flex items-center space-x-2 text-muted-foreground hover:text-accent transition-colors"
                 >
                   <Phone className="h-4 w-4 flex-shrink-0" />

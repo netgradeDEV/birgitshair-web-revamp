@@ -57,7 +57,7 @@ const Kontakt = () => {
       const validatedData = contactSchema.parse(formData);
 
       // Create WhatsApp message with proper encoding
-      const whatsappNumber = "4993170096040";
+      const whatsappNumber = "499316606888";
       const message = `Neue Kontaktanfrage:\n\nName: ${validatedData.name}\nE-Mail: ${validatedData.email}\nTelefon: ${validatedData.phone || "Nicht angegeben"}\n\nNachricht:\n${validatedData.message}`;
       
       // Properly encode for URL to prevent XSS
@@ -135,7 +135,7 @@ const Kontakt = () => {
                 <h2 className="font-serif text-3xl font-bold mb-6">Kontaktinformationen</h2>
                 <p className="text-muted-foreground mb-8">
                   Erreichen Sie uns telefonisch, per E-Mail oder besuchen Sie uns direkt in
-                  unserem Salon in Würzburg Heidingsfeld.
+                  unserem Salon in Würzburg - Rottenbauer.
                 </p>
               </div>
 
@@ -148,8 +148,8 @@ const Kontakt = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Adresse</h3>
                       <p className="text-sm text-muted-foreground">
-                        Mergentheimer Straße 24<br />
-                        97084 Würzburg-Heidingsfeld
+                        Wolfskeelstraße 23<br />
+                        Würzburg - Rottenbauer
                       </p>
                     </div>
                   </div>
@@ -161,10 +161,10 @@ const Kontakt = () => {
                     <div>
                       <h3 className="font-semibold mb-1">Telefon</h3>
                       <a
-                        href="tel:+4993170096040"
+                        href="tel:+499316606888"
                         className="text-sm text-muted-foreground hover:text-accent transition-colors"
                       >
-                        0931 700 960 40
+                        0931/6606888
                       </a>
                     </div>
                   </div>
@@ -191,8 +191,10 @@ const Kontakt = () => {
                     <div>
                       <h3 className="font-semibold mb-2">Öffnungszeiten</h3>
                       <div className="text-sm text-muted-foreground space-y-1">
-                        <p>Montag - Freitag: 8:00 - 18:00 Uhr</p>
-                        <p>Samstag: 8:00 - 14:00 Uhr</p>
+                        <p>Dienstag & Mittwoch: 9:00 - 18:00 Uhr</p>
+                        <p>Donnerstag: 9:00 - 16:00 Uhr</p>
+                        <p>Freitag: 9:00 - 19:00 Uhr</p>
+                        <p>Samstag: 8:00 - 13:00 Uhr</p>
                         <p className="text-xs mt-2 italic">Termine auch außerhalb der Öffnungszeiten nach Vereinbarung möglich</p>
                       </div>
                     </div>
@@ -207,7 +209,7 @@ const Kontakt = () => {
                     <MapPin className="h-12 w-12 mx-auto mb-2 opacity-20" />
                     <p className="text-sm">
                       <a
-                        href="https://maps.google.com/?q=Mergentheimer+Str.+24+97084+Würzburg"
+                        href="https://maps.google.com/?q=Wolfskeelstraße+23+Würzburg"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-accent hover:underline"
@@ -333,7 +335,7 @@ const Kontakt = () => {
             variant="outline"
             className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
           >
-            <a href="tel:+4993170096040">0931 700 960 40</a>
+            <a href="tel:+499316606888">0931/6606888</a>
           </Button>
         </div>
       </section>
