@@ -229,7 +229,7 @@ const Kontakt = () => {
                           variant="outline"
                         >
                           <a
-                            href="https://maps.app.goo.gl/your-google-business-link"
+                            href="https://www.google.com/maps/dir/?api=1&destination=Wolfskeelstraße+23,+97084+Würzburg"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
