@@ -229,7 +229,7 @@ const Kontakt = () => {
                           variant="outline"
                         >
                           <a
-                            href="https://www.google.com/maps?um=1&ie=UTF-8&fb=1&gl=de&sa=X&daddr=Wolfskeelstra%C3%9Fe+23,+97084+W%C3%BCrzburg"
+                            href="https://www.google.com/maps?sca_esv=579135331b5c96bb&sxsrf=AE3TifPuyeO0Kl_HsaQqcee0djINEHoNoQ:1759823963756&uact=5&gs_lp=Egxnd3Mtd2l6LXNlcnAiHkZyaXNldXJzYWxvbmcgQmlyZ2l0IGhhcnRiYXVlcjINEC4YgAQYxwEYDRivATIFEAAY7wUyBRAAGO8FMggQABiiBBiJBTIFEAAY7wVIrDBQ0AlY6S9wBHgAkAEAmAFzoAGQFKoBBDI3LjO4AQPIAQD4AQGYAiKgApoVwgILEAAYgAQYsAMYogTCAggQABiwAxjvBcICBBAjGCfCAgoQIxiABBgnGIoFwgIWEC4YgAQYsQMY0QMYQxiDARjHARiKBcICDhAAGIAEGLEDGIMBGIoFwgILEC4YgAQYsQMYgwHCAgUQABiABMICCxAAGIAEGLEDGIMBwgINECMY8AUYgAQYJxiKBcICEBAuGIAEGNEDGEMYxwEYigXCAgoQABiABBhDGIoFwgIQEAAYgAQYsQMYQxiDARiKBcICChAAGIAEGBQYhwLCAgoQLhiABBhDGIoFwgINEC4YgAQYQxjUAhiKBcICDRAAGIAEGLEDGBQYhwLCAhEQLhiABBixAxjRAxiDARjHAcICDRAAGIAEGBQYhwIYyQPCAg0QABiABBhDGMkDGIoFwgINEAAYgAQYsQMYQxiKBcICCBAAGIAEGLEDwgIIEAAYgAQYkgPCAgsQABiABBiSAxiKBcICDhAAGIAEGLEDGIMBGMkDwgILEC4YgAQYxwEYrwHCAgoQABiABBiSAxgKwgIQEAAYgAQYsQMYgwEYyQMYCsICBxAAGIAEGArCAgcQABiABBgNwgIKEAAYgAQYyQMYDcICEBAuGIAEGMcBGA0YjgUYrwHCAgYQABgNGB7CAgYQABgWGB7CAggQABgIGA0YHpgDAIgGAZAGBZIHBDI3LjegB4KxArIHBDIzLje4B4sVwgcHMS4xOC4xNcgHYA&um=1&ie=UTF-8&fb=1&gl=de&sa=X&geocode=KVP8D2sEhaJHMWuAq5DhPMyH&daddr=Wolfskeelstra%C3%9Fe+23,+97084+W%C3%BCrzburg"
                             target="_blank"
                             rel="noopener noreferrer"
                           >
