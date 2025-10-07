@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => ({
   base: mode === "production" ? "/birgitshair-web-revamp/" : "/",
   server: {
     host: "::",
-    port: 5173,
+    port: 8080,
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
