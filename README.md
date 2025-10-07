@@ -102,7 +102,7 @@ npm install
 npm run dev
 ```
 
-Die Website ist dann unter `http://localhost:8080` erreichbar.
+Die Website ist dann unter `http://localhost:5173` erreichbar.
 
 ### Build für Produktion
 ```bash
