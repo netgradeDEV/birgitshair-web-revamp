@@ -46,6 +46,7 @@ const Kontakt = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showMap, setShowMap] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -202,23 +203,60 @@ const Kontakt = () => {
                 </div>
               </Card>
 
-              {/* Map Placeholder */}
+              {/* Map with Privacy-Compliant Loading */}
               <Card className="overflow-hidden border-border">
-                <div className="aspect-video bg-muted flex items-center justify-center">
-                  <div className="text-center text-muted-foreground">
-                    <MapPin className="h-12 w-12 mx-auto mb-2 opacity-20" />
-                    <p className="text-sm">
-                      <a
-                        href="https://maps.google.com/?q=Wolfskeelstraße+23+Würzburg"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-accent hover:underline"
-                      >
-                        Route in Google Maps öffnen
-                      </a>
-                    </p>
+                {!showMap ? (
+                  <div className="aspect-video bg-gradient-to-br from-primary/5 to-accent/5 flex items-center justify-center p-6">
+                    <div className="text-center space-y-4 max-w-md">
+                      <MapPin className="h-16 w-16 mx-auto text-accent/60" />
+                      <div>
+                        <h3 className="font-semibold text-lg mb-2">Standort auf Google Maps</h3>
+                        <p className="text-sm text-muted-foreground mb-4">
+                          Durch das Laden der Karte werden Daten an Google übertragen. 
+                          Mit Klick auf "Karte laden" stimmen Sie der Datenübertragung zu.
+                        </p>
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                        <Button
+                          onClick={() => setShowMap(true)}
+                          className="bg-accent hover:bg-accent/90 text-accent-foreground"
+                        >
+                          <MapPin className="h-4 w-4 mr-2" />
+                          Karte laden
+                        </Button>
+                        <Button
+                          asChild
+                          variant="outline"
+                        >
+                          <a
+                            href="https://maps.app.goo.gl/your-google-business-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            Direkt in Google Maps öffnen
+                          </a>
+                        </Button>
+                      </div>
+                      <p className="text-xs text-muted-foreground">
+                        Mehr Informationen in unserer{" "}
+                        <a href="/datenschutz" className="text-accent hover:underline">
+                          Datenschutzerklärung
+                        </a>
+                      </p>
+                    </div>
                   </div>
-                </div>
+                ) : (
+                  <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2592.8!2d9.971!3d49.769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDnCsDQ2JzA4LjQiTiA5wrA1OCcxNS42IkU!5e0!3m2!1sde!2sde!4v1234567890"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, minHeight: "400px" }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Google Maps Standort Friseursalon Birgit Hartbauer"
+                  />
+                )}
               </Card>
             </div>
 
